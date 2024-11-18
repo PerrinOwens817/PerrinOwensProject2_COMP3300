@@ -55,7 +55,7 @@
             // lblResult
             // 
             lblResult.AutoSize = true;
-            lblResult.Location = new Point(185, 97);
+            lblResult.Location = new Point(149, 93);
             lblResult.Name = "lblResult";
             lblResult.Size = new Size(50, 20);
             lblResult.TabIndex = 2;
@@ -65,7 +65,7 @@
             // lblRandomLetters
             // 
             lblRandomLetters.AutoSize = true;
-            lblRandomLetters.Location = new Point(185, 133);
+            lblRandomLetters.Location = new Point(149, 133);
             lblRandomLetters.Name = "lblRandomLetters";
             lblRandomLetters.Size = new Size(50, 20);
             lblRandomLetters.TabIndex = 3;

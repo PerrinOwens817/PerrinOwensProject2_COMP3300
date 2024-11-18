@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace PerrinOwensProject2.Models
 {
@@ -27,7 +28,7 @@ namespace PerrinOwensProject2.Models
                 {
                     foreach (var word in entry.words)
                     {
-                        words.Add(words.ToLower());
+                        words.Add(word.ToLower());
                     }
                 }
             }
@@ -37,7 +38,7 @@ namespace PerrinOwensProject2.Models
             }
         }
 
-        private bool IsValidWord(string word)
+        public bool IsValidWord(string word)
         {
             return words.Contains(word.ToLower());
         }

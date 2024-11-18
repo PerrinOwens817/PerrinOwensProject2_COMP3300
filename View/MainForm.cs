@@ -36,6 +36,7 @@ namespace PerrinOwensProject2.View
             lblRandomLetters.Text = string.Join(", ", randomLetters);
         }
 
+
         private void lblResult_Click(object sender, EventArgs e)
         {
             //...
@@ -49,25 +50,32 @@ namespace PerrinOwensProject2.View
         private void btnSubmitWord_Click(object sender, EventArgs e)
         {
             string enteredWord = txtWordEntry.Text;
+            if (enteredWords.Contains(enteredWord))
+            {
+                lblResult.Text = "Word already entered!";
+                return;
+            }
+
             if (IsValidWord(enteredWord))
             {
-                lblResult.Text = $"Valid word! Points: {enteredWord.Length}";
+                enteredWords.Add(enteredWord);
+                int points = CalculatePoints(enteredWord);
+                validWords.Add((enteredWord, DateTime.Now, points));
+                lblResult.Text = $"Valid word! Points: {points}";
             }
             else
             {
-                lblResult.Text = "Invalid word or too short!";
+                string reason = GetInvalidReason(enteredWord);
+                invalidWords.Add((enteredWord, DateTime.Now, reason));
+                lblResult.Text = $"Invalid word! Reason: {reason}";
             }
         }
 
         private bool IsValidWord(string word)
         {
-            if (word.Length < 3)
-            {
-                return false;
-            }
+            if (word.Length < 3) return false;
 
             List<char> availableLetters = new List<char>(lblRandomLetters.Text.Replace(", ", "").ToCharArray());
-
             foreach (char letter in word)
             {
                 if (!availableLetters.Contains(letter))
@@ -78,7 +86,35 @@ namespace PerrinOwensProject2.View
                 availableLetters.Remove(letter);
             }
 
-            return true;
+            return dictionary.IsValidWord(word);
+        }
+
+        private int CalculatePoints(string word)
+        {
+            switch (word.Length)
+            {
+                case 3: return 90;
+                case 4: return 160;
+                case 5: return 250;
+                case 6: return 360;
+                case 7: return 490;
+                default: return 0;
+            }
+        }
+
+        private string GetInvalidReason(string word)
+        {
+            if (word.Length < 3)
+            {
+                return "Too short";
+            }
+
+            if (!dictionary.IsValidWord(word))
+            {
+                return "Not in dictionary";
+            }
+
+            return "Invalid letters";
         }
     }
 }
