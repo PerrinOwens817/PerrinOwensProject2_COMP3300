@@ -50,6 +50,7 @@
             colName = new ColumnHeader();
             colScore = new ColumnHeader();
             colTime = new ColumnHeader();
+            btnLoadPreviousSession = new Button();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -65,7 +66,7 @@
             // 
             btnSubmitWord.Location = new Point(431, 372);
             btnSubmitWord.Name = "btnSubmitWord";
-            btnSubmitWord.Size = new Size(151, 29);
+            btnSubmitWord.Size = new Size(167, 29);
             btnSubmitWord.TabIndex = 1;
             btnSubmitWord.Text = "Submit";
             btnSubmitWord.UseVisualStyleBackColor = true;
@@ -145,7 +146,7 @@
             // 
             btnTwistLetters.Location = new Point(431, 407);
             btnTwistLetters.Name = "btnTwistLetters";
-            btnTwistLetters.Size = new Size(151, 29);
+            btnTwistLetters.Size = new Size(167, 29);
             btnTwistLetters.TabIndex = 6;
             btnTwistLetters.Text = "Twist Letters";
             btnTwistLetters.UseVisualStyleBackColor = true;
@@ -155,7 +156,7 @@
             // 
             btnNewGame.Location = new Point(431, 442);
             btnNewGame.Name = "btnNewGame";
-            btnNewGame.Size = new Size(151, 29);
+            btnNewGame.Size = new Size(167, 29);
             btnNewGame.TabIndex = 7;
             btnNewGame.Text = "New Game";
             btnNewGame.UseVisualStyleBackColor = true;
@@ -165,7 +166,7 @@
             // 
             btnExit.Location = new Point(431, 477);
             btnExit.Name = "btnExit";
-            btnExit.Size = new Size(151, 29);
+            btnExit.Size = new Size(167, 29);
             btnExit.TabIndex = 8;
             btnExit.Text = "Exit Game";
             btnExit.UseVisualStyleBackColor = true;
@@ -175,7 +176,7 @@
             // 
             btnExportStats.Location = new Point(431, 582);
             btnExportStats.Name = "btnExportStats";
-            btnExportStats.Size = new Size(151, 29);
+            btnExportStats.Size = new Size(167, 29);
             btnExportStats.TabIndex = 9;
             btnExportStats.Text = "Export Stats";
             btnExportStats.UseVisualStyleBackColor = true;
@@ -185,7 +186,7 @@
             // 
             btnShowHighScores.Location = new Point(431, 512);
             btnShowHighScores.Name = "btnShowHighScores";
-            btnShowHighScores.Size = new Size(151, 29);
+            btnShowHighScores.Size = new Size(167, 29);
             btnShowHighScores.TabIndex = 11;
             btnShowHighScores.Text = "Show High Scores";
             btnShowHighScores.UseVisualStyleBackColor = true;
@@ -195,7 +196,7 @@
             // 
             btnResetHighScores.Location = new Point(431, 547);
             btnResetHighScores.Name = "btnResetHighScores";
-            btnResetHighScores.Size = new Size(151, 29);
+            btnResetHighScores.Size = new Size(167, 29);
             btnResetHighScores.TabIndex = 12;
             btnResetHighScores.Text = "Reset High Scores";
             btnResetHighScores.UseVisualStyleBackColor = true;
@@ -229,11 +230,22 @@
             colTime.TextAlign = HorizontalAlignment.Center;
             colTime.Width = 200;
             // 
+            // btnLoadPreviousSession
+            // 
+            btnLoadPreviousSession.Location = new Point(431, 617);
+            btnLoadPreviousSession.Name = "btnLoadPreviousSession";
+            btnLoadPreviousSession.Size = new Size(167, 29);
+            btnLoadPreviousSession.TabIndex = 14;
+            btnLoadPreviousSession.Text = "Load Previous Session";
+            btnLoadPreviousSession.UseVisualStyleBackColor = true;
+            btnLoadPreviousSession.Click += btnLoadPreviousSession_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1149, 623);
+            ClientSize = new Size(1149, 649);
+            Controls.Add(btnLoadPreviousSession);
             Controls.Add(lvHighScores);
             Controls.Add(btnResetHighScores);
             Controls.Add(btnShowHighScores);
@@ -280,5 +292,6 @@
         private ColumnHeader colName;
         private ColumnHeader colScore;
         private ColumnHeader colTime;
+        private Button btnLoadPreviousSession;
     }
 }

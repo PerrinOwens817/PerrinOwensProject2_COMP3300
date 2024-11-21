@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PerrinOwensProject2.Models;
+using JsonConverter = System.Text.Json.Serialization.JsonConverter;
 using Timer = System.Threading.Timer;
 
 namespace PerrinOwensProject2.View
@@ -288,11 +279,6 @@ namespace PerrinOwensProject2.View
             ResetHighScores();
         }
 
-        private void lvHighScores_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //...
-        }
-
         private void EndRound()
         {
             int totalScore = validWords.Sum(v => v.points);
@@ -317,6 +303,29 @@ namespace PerrinOwensProject2.View
         private void lvHighScores_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             //...
+        }
+
+        private void LoadPreviousSession()
+        {
+            try
+            {
+                var json = File.ReadAllText("stats.json");
+                var previousSessionData = JsonConvert.DeserializeObject<PreviousSessionData>(json);
+                validWords = previousSessionData.ValidWords;
+                invalidWords = previousSessionData.InvalidWords;
+                SetTimer(previousSessionData.Timer);
+                MessageBox.Show("Previous session loaded successfully.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while loading the previous session. Starting a new game.");
+                InitializeGame();
+            }
+        }
+
+        private void btnLoadPreviousSession_Click(object sender, EventArgs e)
+        {
+            LoadPreviousSession();
         }
     }
 }
