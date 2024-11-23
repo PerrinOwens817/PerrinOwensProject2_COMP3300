@@ -2,6 +2,8 @@
 using PerrinOwensProject2.Models;
 using Timer = System.Windows.Forms.Timer;
 
+// I hope you will see this teacher... please not the highscore and stat files are in the bin folder.
+
 namespace PerrinOwensProject2.View
 {
     /// <summary>
