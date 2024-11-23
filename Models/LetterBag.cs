@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PerrinOwensProject2.Models
+﻿namespace PerrinOwensProject2.Models
 {
+    /// <summary>
+    /// represents a bag of letters used to draw random letters for word formation.
+    /// </summary>
     public class LetterBag
     {
         private List<char> lettersBag;
         private Random random;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LetterBag"/> class.
+        /// </summary>
         public LetterBag()
         {
             lettersBag = new List<char>
@@ -41,6 +41,11 @@ namespace PerrinOwensProject2.Models
             random = new Random();
         }
 
+        /// <summary>
+        /// Draws a specified number of  random letters from the letter bag.
+        /// </summary>
+        /// <param name="count">The number of letters to draw.</param>
+        /// <returns>A list of randomly drawn letters.</returns>
         public List<char> DrawRandomLetters(int count = 7)
         {
             List<char> randomLetters = new List<char>();
@@ -49,7 +54,7 @@ namespace PerrinOwensProject2.Models
                 int index = random.Next(lettersBag.Count);
                 char letter = lettersBag[index];
                 randomLetters.Add(letter);
-                lettersBag.RemoveAt(index); // BTW this is competely optional, remove the letter if you don't want any duplicates.
+                lettersBag.RemoveAt(index); // BTW this is completely optional, remove the letter if you don't want any duplicates.
             }
             return randomLetters;
         }
