@@ -4,6 +4,9 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace PerrinOwensProject2.View
 {
+    /// <summary>
+    /// The main form for the Text Twist game.
+    /// </summary>
     public partial class MainForm : Form
     {
         private LetterBag letterBag;
@@ -14,6 +17,9 @@ namespace PerrinOwensProject2.View
         private int timeLeft;
         private List<HighScore> highScores;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainForm"/> class.
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
@@ -29,7 +35,10 @@ namespace PerrinOwensProject2.View
             LoadHighScores();
             InitializeGame();
         }
-
+        
+        /// <summary>
+        /// Displays seven random letters on the form.
+        /// </summary>
         private void DisplayRandomLetters()
         {
             List<char> randomLetters = letterBag.DrawRandomLetters();
@@ -47,6 +56,11 @@ namespace PerrinOwensProject2.View
             //...
         }
 
+        /// <summary>
+        /// Handles the clock event for submitting a word.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The event data.</param>
         private void btnSubmitWord_Click(object sender, EventArgs e)
         {
             string enteredWord = txtWordEntry.Text;
@@ -71,6 +85,11 @@ namespace PerrinOwensProject2.View
             }
         }
 
+        /// <summary>
+        /// Checks ifthe entered word is valid.
+        /// </summary>
+        /// <param name="word">The word to check.</param>
+        /// <returns>True, if the word is valid; otherwise, false.</returns>
         private bool IsValidWord(string word)
         {
             if (word.Length < 3) return false;
@@ -89,6 +108,12 @@ namespace PerrinOwensProject2.View
             return dictionary.IsValidWord(word);
         }
 
+
+        /// <summary>
+        /// Calculates the points for the entered word.
+        /// </summary>
+        /// <param name="word">The word to calculate points for.</param>
+        /// <returns>The points for the word.</returns>
         private int CalculatePoints(string word)
         {
             switch (word.Length)
@@ -102,6 +127,11 @@ namespace PerrinOwensProject2.View
             }
         }
 
+        /// <summary>
+        /// Gets the reason why a word is invalid.
+        /// </summary>
+        /// <param name="word">The invalid word.</param>
+        /// <returns>The reason why the word is invalid.</returns>
         private string GetInvalidReason(string word)
         {
             if (word.Length < 3)
@@ -117,11 +147,15 @@ namespace PerrinOwensProject2.View
             return "Invalid letters";
         }
 
+        
         private void MainForm_Load(object sender, EventArgs e)
         {
             //...
         }
 
+        /// <summary>
+        /// Initializes the game timer.
+        /// </summary>
         private void InitializeTimer()
         {
             gameTimer = new Timer();
@@ -131,6 +165,11 @@ namespace PerrinOwensProject2.View
             lblTimer.Text = "Time Left: " + timeLeft.ToString();
         }
 
+        /// <summary>
+        /// Handles the game timer tick event.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The event data.</param>
         private void gameTimer_Tick(object? sender, EventArgs e)
         {
             if (timeLeft > 0)
@@ -146,7 +185,10 @@ namespace PerrinOwensProject2.View
             }
         }
 
-
+        /// <summary>
+        /// Sets the game timer to the specified number of seconds.
+        /// </summary>
+        /// <param name="seconds">The number of seconds.</param>
         private void SetTimer(int seconds)
         {
             timeLeft = seconds;
@@ -168,6 +210,11 @@ namespace PerrinOwensProject2.View
             SetTimer(180);
         }
 
+        /// <summary>
+        /// Handles the twist letters button click event.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The event data.</param>
         private void btnTwistLetters_Click(object sender, EventArgs e)
         {
             var random = new Random();
@@ -176,11 +223,19 @@ namespace PerrinOwensProject2.View
             lblRandomLetters.Text = string.Join(", ", letters);
         }
 
+        /// <summary>
+        /// Handles the new game button click event.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The event data.</param>
         private void btnNewGame_Click(object sender, EventArgs e)
         {
             InitializeGame();
         }
 
+        /// <summary>
+        /// Initializes a new game by resetting all relevant data.
+        /// </summary>
         private void InitializeGame()
         {
             SetTimer(60);
@@ -197,11 +252,21 @@ namespace PerrinOwensProject2.View
             lblTimer.Text = "Time Left: " + timeLeft.ToString();
         }
 
+        /// <summary>
+        /// Handles the click event for exiting the application.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The event data.</param>
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        /// <summary>
+        /// Handles the click event for exporting the game stats.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The event data.</param>
         private void btnExportStats_Click(object sender, EventArgs e)
         {
             if (validWords.Count == 0 && invalidWords.Count == 0)
@@ -221,6 +286,9 @@ namespace PerrinOwensProject2.View
             MessageBox.Show("Stats exported.");
         }
 
+        /// <summary>
+        /// Loads the high scores from a file.
+        /// </summary>
         private void LoadHighScores()
         {
             if (File.Exists("highscores.json"))
@@ -234,20 +302,29 @@ namespace PerrinOwensProject2.View
             }
         }
 
-
+        /// <summary>
+        /// Records a high score
+        /// </summary>
+        /// <param name="playerName">The player's name</param>
+        /// <param name="score">The score achieved by the player.</param>
         private void RecordHighScore(string playerName, int score)
         {
             highScores.Add(new HighScore { Name = playerName, Score = score, Time = DateTime.Now });
             SaveHighScores();
         }
 
-
+        /// <summary>
+        /// Saves the high scores to a file.
+        /// </summary>
         private void SaveHighScores()
         {
             var json = JsonConvert.SerializeObject(highScores);
             File.WriteAllText("highscores.json", json);
         }
 
+        /// <summary>
+        /// Clears the high scores list view and displays high scores sorted by score and time.
+        /// </summary>
         private void ShowHighScores()
         {
             lvHighScores.Items.Clear();
@@ -262,6 +339,9 @@ namespace PerrinOwensProject2.View
             }
         }
 
+        /// <summary>
+        /// Clears the high scores and updates the high scores list view.
+        /// </summary>
         private void ResetHighScores()
         {
             highScores.Clear();
@@ -269,16 +349,29 @@ namespace PerrinOwensProject2.View
             ShowHighScores();
         }
 
+        /// <summary>
+        /// Handles displaying high scores when the button is clicked.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The event data.</param>
         private void btnShowHighScores_Click(object sender, EventArgs e)
         {
             ShowHighScores();
         }
 
+        /// <summary>
+        /// Handles resetting high scores when the button is clicked.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The event data.</param>
         private void btnResetHighScores_Click(object sender, EventArgs e)
         {
             ResetHighScores();
         }
 
+        /// <summary>
+        /// Ends the current round, prompts the player fo their name, records the high score, and then displays the results.
+        /// </summary>
         private void EndRound()
         {
             int totalScore = validWords.Sum(v => v.points);
@@ -289,12 +382,19 @@ namespace PerrinOwensProject2.View
             DisplayResults();
         }
 
+        /// <summary>
+        /// Prompts the player for their name.
+        /// </summary>
+        /// <returns>The player's name.</returns>
         private string PromptForPlayerName()
         {
             string playerName = Microsoft.VisualBasic.Interaction.InputBox("Enter your name:", "Player Name", "Player");
             return playerName;
         }
 
+        /// <summary>
+        /// Displays a message box indicating the round is over.
+        /// </summary>
         private void DisplayResults()
         {
             MessageBox.Show("Round over! Check high scores to see your results.");
@@ -305,6 +405,9 @@ namespace PerrinOwensProject2.View
             //...
         }
 
+        /// <summary>
+        /// Loads the previous game session from a JSON file and initializes the game state.
+        /// </summary>
         private void LoadPreviousSession()
         {
             try
@@ -324,8 +427,11 @@ namespace PerrinOwensProject2.View
             }
         }
 
-
-
+        /// <summary>
+        /// Handles loading the previous session when the button is clicked.
+        /// </summary>
+        /// <param name="sender">The source of the data.</param>
+        /// <param name="e">The event data.</param>
         private void btnLoadPreviousSession_Click(object sender, EventArgs e)
         {
             LoadPreviousSession();
