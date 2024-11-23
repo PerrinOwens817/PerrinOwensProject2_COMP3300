@@ -7,7 +7,7 @@ namespace PerrinOwensProject2.Models
     /// </summary>
     public class Dictionary
     {
-        private HashSet<string> words;
+        private HashSet<string> _words;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Dictionary"/> class.
@@ -15,7 +15,7 @@ namespace PerrinOwensProject2.Models
         /// <param name="filePath">The path to the dictionary file.</param>
         public Dictionary(string filePath)
         {
-            words = new HashSet<string>();
+            _words = new HashSet<string>();
             LoadDictionary(filePath);
         }
 
@@ -35,9 +35,12 @@ namespace PerrinOwensProject2.Models
                 {
                     foreach (var entry in data)
                     {
-                        foreach (var word in entry.words)
+                        foreach (var word in entry.words!)
                         {
-                            words.Add(word.ToLower());
+                            if (word != null)
+                            {
+                                _words.Add(word.ToLower());
+                            }
                         }
                     }
                 }
@@ -59,7 +62,8 @@ namespace PerrinOwensProject2.Models
         /// <returns>true, if the word is valid; otherwise, false.</returns>
         public bool IsValidWord(string word)
         {
-            return words.Contains(word.ToLower());
+            return _words.Contains(word.ToLower());
         }
     }
 }
+

@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PerrinOwensProject2.Models;
-//using JsonConverter = System.Text.Json.Serialization.JsonConverter;
-using Timer = System.Threading.Timer;
+using Timer = System.Windows.Forms.Timer;
 
 namespace PerrinOwensProject2.View
 {
@@ -12,7 +11,6 @@ namespace PerrinOwensProject2.View
         private List<string> enteredWords;
         private List<(string word, DateTime time, int points)> validWords;
         private List<(string word, DateTime time, string reason)> invalidWords;
-        private Timer gamerTimer;
         private int timeLeft;
         private List<HighScore> highScores;
 
@@ -24,6 +22,7 @@ namespace PerrinOwensProject2.View
             enteredWords = new List<string>();
             validWords = new List<(string word, DateTime time, int points)>();
             invalidWords = new List<(string word, DateTime time, string reason)>();
+            gameTimer = new Timer();
             DisplayRandomLetters();
             InitializeTimer();
             highScores = new List<HighScore>();
@@ -125,14 +124,14 @@ namespace PerrinOwensProject2.View
 
         private void InitializeTimer()
         {
-            gameTimer = new System.Windows.Forms.Timer();
+            gameTimer = new Timer();
             gameTimer.Interval = 1000;
             gameTimer.Tick += gameTimer_Tick;
             timeLeft = 60;
             lblTimer.Text = "Time Left: " + timeLeft.ToString();
         }
 
-        private void gameTimer_Tick(object sender, EventArgs e)
+        private void gameTimer_Tick(object? sender, EventArgs e)
         {
             if (timeLeft > 0)
             {
@@ -227,13 +226,14 @@ namespace PerrinOwensProject2.View
             if (File.Exists("highscores.json"))
             {
                 var json = File.ReadAllText("highscores.json");
-                highScores = JsonConvert.DeserializeObject<List<HighScore>>(json);
+                highScores = JsonConvert.DeserializeObject<List<HighScore>>(json) ?? new List<HighScore>();
             }
             else
             {
                 highScores = new List<HighScore>();
             }
         }
+
 
         private void RecordHighScore(string playerName, int score)
         {
@@ -311,17 +311,20 @@ namespace PerrinOwensProject2.View
             {
                 var json = File.ReadAllText("stats.json");
                 var previousSessionData = JsonConvert.DeserializeObject<PreviousSessionData>(json);
-                validWords = previousSessionData.ValidWords;
-                invalidWords = previousSessionData.InvalidWords;
-                SetTimer(previousSessionData.Timer);
+                validWords = previousSessionData?.ValidWords ?? new List<(string word, DateTime time, int points)>();
+                invalidWords = previousSessionData?.InvalidWords ?? new List<(string word, DateTime time, string reason)>();
+                SetTimer(previousSessionData?.Timer ?? 60);
+                gameTimer.Start(); // Start the timer after loading
                 MessageBox.Show("Previous session loaded successfully.");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("An error occurred while loading the previous session. Starting a new game.");
                 InitializeGame();
             }
         }
+
+
 
         private void btnLoadPreviousSession_Click(object sender, EventArgs e)
         {

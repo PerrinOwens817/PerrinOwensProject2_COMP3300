@@ -8,11 +8,11 @@
        /// <summary>
        /// Gets or sets the letter associated with the dictionary entry.
        /// </summary>
-        public string letter { get; set; }
+        public string? letter { get; set; }
 
        /// <summary>
        /// Gets or sets the list of words associated with the letter.
        /// </summary>
-        public List<string> words { get; set; }
+        public List<string>? words { get; set; }
     }
 }

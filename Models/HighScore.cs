@@ -8,7 +8,7 @@
         /// <summary>
         /// Gets or sets the name of the player.
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// Gets or sets the score achieved by the player.
