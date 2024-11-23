@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PerrinOwensProject2.View.MainForm">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gQECFCgQEKBI4FpZCBSAHDAGAeBGCAAYES4IIACAFAA=</HashCode>
+      <FileName>View\MainForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PerrinOwensProject2.Models.LetterBag">
+    <Position X="2.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAQQAAAAAAA=</HashCode>
+      <FileName>Models\LetterBag.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PerrinOwensProject2.Models.Dictionary">
+    <Position X="4.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Models\Dictionary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PerrinOwensProject2.Models.DictionaryEntry">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAACAAAAAAAAA=</HashCode>
+      <FileName>Models\DictionaryEntry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PerrinOwensProject2.Models.HighScore">
+    <Position X="8.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAQAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Models\HighScore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PerrinOwensProject2.Models.PreviousSessionData">
+    <Position X="10.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAEEAAA=</HashCode>
+      <FileName>Models\PreviousSessionData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

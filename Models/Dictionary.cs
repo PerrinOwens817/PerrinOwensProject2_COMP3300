@@ -7,7 +7,7 @@ namespace PerrinOwensProject2.Models
     /// </summary>
     public class Dictionary
     {
-        private HashSet<string> _words;
+        private readonly HashSet<string> _words;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Dictionary"/> class.
@@ -15,7 +15,7 @@ namespace PerrinOwensProject2.Models
         /// <param name="filePath">The path to the dictionary file.</param>
         public Dictionary(string filePath)
         {
-            _words = new HashSet<string>();
+            _words = ["example1", "example2"];
             LoadDictionary(filePath);
         }
 
